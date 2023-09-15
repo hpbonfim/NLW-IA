@@ -1,8 +1,4 @@
-# React + TypeScript + Vite + Bun
+## 💻 Projeto
 
-```sh
-bun install
-bun run dev
-bun run build
-bun run preview
-```
+Aplicação que possibilita realizar upload de videos e por meio de IA, criar automaticamente títulos chamativos e descrições com um boa indexação.
+
