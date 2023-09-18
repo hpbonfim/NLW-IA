@@ -1,11 +1,15 @@
 import { FastifyInstance } from "fastify";
 import { fastifyMultipart } from "@fastify/multipart";
-import path from "node:path";
 import { randomUUID } from "node:crypto";
 import fs from "node:fs";
 import { pipeline } from "node:stream";
 import { promisify } from "node:util";
 import { prisma } from "../lib/prisma";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const pump = promisify(pipeline)
 
@@ -31,7 +35,7 @@ export async function uploadVideoRoute(app: FastifyInstance) {
 
     const fileBaseName = path.basename(data.filename, extension)
     const fileUploadName = `${fileBaseName}-${randomUUID()}${extension}`
-    const uploadDestination = path.resolve(__dirname, '../../tmp',  fileUploadName)
+    const uploadDestination = path.resolve(__dirname, '../../tmp', fileUploadName)
 
     await pump(data.file, fs.createWriteStream(uploadDestination))
 
